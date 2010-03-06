@@ -1,0 +1,5 @@
+*~
+log/development.log
+log/cucumber.log
+tmp/*
+db/development.sqlite3
