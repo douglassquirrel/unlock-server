@@ -12,7 +12,7 @@ module NavigationHelpers
       '/'
 
     when /the accessible "([^\"]*)" page/
-      '/'
+      "/#{$1.downcase}"
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
