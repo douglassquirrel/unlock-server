@@ -3,3 +3,5 @@ log/development.log
 log/cucumber.log
 tmp/*
 db/development.sqlite3
+db/test.sqlite3
+rerun.txt
