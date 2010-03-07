@@ -1,5 +1,5 @@
-Given /^(?:a|another) test site named "([^\"]*)"$/ do |site_name|
-  Site.register Site.new(site_name)
+Given /^(?:a|another) test site named "([^\"]*)" with short name "([^\"]*)"$/ do |name, short_name|
+  Site.register Site.new(name, short_name)
 end
 
 Then /^I should see the title "([^\"]*)"$/ do |title|

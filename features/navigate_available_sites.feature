@@ -4,8 +4,8 @@ Feature: Navigate available sites
   I want to discover what accessible sites are available
 
   Background:
-    Given a test site named "BigCo"
-      And another test site named "MeTailer"
+    Given a test site named "BigCo" with short name "bigco"
+      And another test site named "MeTailer, Ltd." with short name "metailer"
 
   Scenario: Visit home page
     Given I am on the home page
@@ -14,5 +14,5 @@ Feature: Navigate available sites
 
   Scenario: Visit site
     Given I am on the home page
-    When I follow "BigCo"
-    Then I should be on the accessible "BigCo" page with path "/bigco"
+    When I follow "MeTailer, Ltd."
+    Then I should be on the accessible "metailer" page

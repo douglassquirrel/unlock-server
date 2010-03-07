@@ -1,8 +1,9 @@
 class Site
-  attr_accessor :name
+  attr_accessor :name, :short_name
 
-  def initialize(name)
-    @name = name
+  def initialize(name, short_name)
+    @name       = name
+    @short_name = short_name
   end
 
   @@sites = []
