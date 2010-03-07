@@ -3,6 +3,6 @@
 <h2 id="caption">Sites available through BlindPages:</h2>
 <ul>
   <% @sites.each do |site| %>
-    <li><a href="<%= site.link %>"><%= site.name %></a></li>
+    <li><a href="<%= site.name.downcase %>"><%= site.name %></a></li>
   <% end %>
 </ul>

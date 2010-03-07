@@ -1,5 +1,5 @@
 Given /^(?:a|another) test site named "([^\"]*)"$/ do |site_name|
-  true #pending # express the regexp above with the code you wish you had
+  Site.register Site.new(site_name)
 end
 
 Then /^I should see the title "([^\"]*)"$/ do |title|
