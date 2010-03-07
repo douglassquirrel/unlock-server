@@ -11,9 +11,9 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
-    when /the accessible "([^\"]*)" page/
-      "/#{$1.downcase}"
-    
+    when /the accessible "(?:[^\"]*)" page with path "([^\"]*)"/
+      $1
+     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

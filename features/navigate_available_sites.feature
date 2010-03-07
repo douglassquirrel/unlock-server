@@ -15,4 +15,4 @@ Feature: Navigate available sites
   Scenario: Visit site
     Given I am on the home page
     When I follow "BigCo"
-    Then I should be on the accessible "BigCo" page
+    Then I should be on the accessible "BigCo" page with path "/bigco"
