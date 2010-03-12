@@ -4,8 +4,10 @@ Feature: Navigate available sites
   I want to discover what accessible sites are available
 
   Background:
-    Given a test site named "BigCo" with short name "bigco"
-      And another test site named "MeTailer, Ltd." with short name "metailer"
+    Given the following sites:
+      |name          |short_name|
+      |BigCo         |bigco     |
+      |MeTailer, Ltd.|metailer  |
 
   Scenario: Visit home page
     Given I am on the home page
