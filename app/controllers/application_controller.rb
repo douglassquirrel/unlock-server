@@ -7,4 +7,11 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+  def method_missing(method)
+    @worker.send(method)
+    respond_to do |format|
+      format.html 
+    end
+  end
 end

@@ -1,8 +1,17 @@
 class HomeController < ApplicationController
-  def index
-    @sites = Site.all
-    respond_to do |format|
-      format.html # index.html.erb
+  attr_accessor :sites
+  def initialize
+    @worker = Worker.new(self)
+  end
+
+  class Worker
+    def initialize(receiver, site_fetcher = Site)
+      @receiver = receiver
+      @site_fetcher = site_fetcher
+    end
+
+    def index
+      @receiver.sites = @site_fetcher.all
     end
   end
 end
