@@ -4,15 +4,13 @@ Feature: View site
   I want to see data from an inaccessible site in an accessible way
 
   Background:
-    Given there is an extractor running
+    Given there is an extractor running with the following pages:
+      |path  |title                      |paragraphs                                   |
+      |/bigco|BigCo - For All Things Big |BigCo is super.,Visit your local BigCo store!|
 
     Given the following sites:
       |name |short_name|
       |BigCo|bigco     |
-
-    And the following pages:
-      |path  |title                      |paragraphs                                   |
-      |/bigco|BigCo - For All Things Big |BigCo is super.,Visit your local BigCo store!|
 
   Scenario: See simple home page
     Given I am on the accessible "bigco" page

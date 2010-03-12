@@ -1,17 +1,13 @@
-Given /^there is an extractor running$/ do 
-  @extractor = Extractor.new
-end
-
 Given /^the following sites:$/ do |site_table|
   site_table.hashes.each do |hash|
     Site.register Site.new(hash['name'], hash['short_name'])
   end
 end
 
-Given /^the following pages:$/ do |page_table|
-  page_table.hashes.each do |page_data|
-    @extractor.register_page page_data
-  end
+Given /^there is an extractor running with the following pages:$/ do |page_table|
+  @extractor = Extractor.new page_table.hashes
+  server_pid = fork { @extractor.start }
+  at_exit { Process.kill("INT", server_pid) }
 end
 
 Then /^I should see the title "([^\"]*)"$/ do |title|
