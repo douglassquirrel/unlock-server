@@ -20,3 +20,4 @@ Feature: View site
       |BigCo is super.              |
       |Visit your local BigCo store!|
 
+# Go to bad path

@@ -1,4 +1,5 @@
 require 'webrick'
+require 'yaml'
 
 class Extractor
   def initialize(pages)
@@ -15,13 +16,21 @@ end
 class ExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
   def initialize(server, pages)
     super(server)
-    @pages = pages
+    @pages = {}
+    pages.each do |original_page|
+      page = original_page.dup
+      path = page.delete("path")
+      page["paragraphs"] = page["paragraphs"].split(',')
+      @pages[path] = page
+    end
   end
 
   def do_GET(request, response)
     response.status = 200 
-    response['Content-Type'] = "application/xml; charset=utf-8"
-    response.body = "<test><path>#{request.path}</path><pages>#{@pages.to_s}</pages></test>"
+    response['Content-Type'] = "application/x-yaml"
+
+    path = request.path
+    response.body = (!@pages[path].nil?) ? YAML::dump(@pages[path]) : "Bad path: #{path}"
   end
 end
 
