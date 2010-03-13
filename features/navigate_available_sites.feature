@@ -1,7 +1,7 @@
 Feature: Navigate available sites
   In order to find out how to use the Internet more independently
   As a visually-impaired person
-  I want to discover what accessible sites are available
+  I want to discover what accessible sites are available using my browser
 
   Background:
     Given the following sites:
