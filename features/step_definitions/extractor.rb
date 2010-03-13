@@ -41,19 +41,17 @@ class ExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
   def do_POST(request, response)
     @pages = {}
     pages = YAML::load(request.query['pages'])
-    p "Got POST for pages: #{pages.inspect}"
     pages.each do |page|
       path = page.delete("path")
       page["paragraphs"] = page["paragraphs"].split(',')
       @pages[path] = page
     end
-    p "Done with POST: pages = #{@pages.inspect}"
   end
 end
 
 if $0 == __FILE__ then
   p "Starting extractor - you will have to kill manually"
-  e = Extractor.new()
+  e = Extractor.new
   server_pid = fork { e.start}
   p "Server pid is #{server_pid}"
 
