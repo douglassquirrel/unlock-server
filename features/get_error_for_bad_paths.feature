@@ -3,15 +3,14 @@ Feature: Get error for bad paths
   As a visually-impaired person
   I want to get helpful browser errors when I enter incorrect URLs
 
-  ######### Need to make extractor on-the-fly configurable
-  #Background:
-    #Given there is an extractor running with the following pages:
-    #  |path         |title            |paragraphs                        |
-    #  |/atlantisbank|Bank Of Atlantis |Serving Atlanteans for 5000 years.|
+  Background:
+    Given there is an extractor running with the following pages:
+      |path         |title            |paragraphs                        |
+      |/atlantisbank|Bank Of Atlantis |Serving Atlanteans for 5000 years.|
 
-    #Given the following sites:
-    #  |name            |short_name  | 
-    #  |Bank Of Atlantis|atlantisbank|
+    Given the following sites:
+      |name            |short_name  | 
+      |Bank Of Atlantis|atlantisbank|
 
   Scenario: Visit nonexistent site
     When I visit the nonexistent "not-here" page

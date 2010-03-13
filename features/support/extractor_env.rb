@@ -1,3 +1,4 @@
+require 'features/step_definitions/extractor'
 require 'net/http'
 require 'uri'
 require 'yaml'

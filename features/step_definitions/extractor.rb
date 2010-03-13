@@ -16,6 +16,15 @@ class Extractor
 end
 
 class ExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
+  @@servlet = nil
+
+  def self.get_instance(server, *options)
+    if @@servlet.nil? then 
+      @@servlet = self.new(server, *options) 
+    end
+    return @@servlet
+  end
+
   def initialize(server)
     super(server)
     @pages = {}
@@ -31,11 +40,14 @@ class ExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
 
   def do_POST(request, response)
     @pages = {}
-    YAML::load(request.query['pages']).each do |page|
+    pages = YAML::load(request.query['pages'])
+    p "Got POST for pages: #{pages.inspect}"
+    pages.each do |page|
       path = page.delete("path")
       page["paragraphs"] = page["paragraphs"].split(',')
       @pages[path] = page
     end
+    p "Done with POST: pages = #{@pages.inspect}"
   end
 end
 
@@ -49,6 +61,6 @@ if $0 == __FILE__ then
   pages = [{"title"=>"BigCo - For All Things Big", 
             "paragraphs"=>"BigCo is super.,Visit your local BigCo store!", 
             "path"=>"/bigco"}]
-  Net::HTTP.post_form(URI.parse('http://localhost:9999'),
+  Net::HTTP.post_form(URI.parse('http://localhost:9999/'),
                       {'pages' => YAML::dump(pages)})
 end
