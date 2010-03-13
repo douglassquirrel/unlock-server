@@ -15,7 +15,7 @@ Feature: View site
   Scenario: Visit simple home page
     Given I am on the accessible "bigco" page
     Then I should see the title "BigCo - For All Things Big"
-    #And I should see these paragraphs: 
-    #  |text                         | 
-    #  |BigCo is super.              |
-    #  |Visit your local BigCo store!|
+    And I should see these paragraphs: 
+      |text                         | 
+      |BigCo is super.              |
+      |Visit your local BigCo store!|

@@ -8,7 +8,8 @@ Then /^I should see a list with caption "([^\"]*)"$/ do |caption|
 end
 
 Then /^I should see these paragraphs:$/ do |expected_paragraphs|
-  actual_paragraphs = [ ['text'], ['first para'], ['second para'] ]
+  doc = Nokogiri::HTML(body)
+  actual_paragraphs = [['text']] | doc.xpath("//p/text()").collect { |node| [node.to_s] }
   expected_paragraphs.diff! actual_paragraphs
 end
 
