@@ -1,10 +1,12 @@
+require 'net/http'
+require 'uri'
 require 'webrick'
 require 'yaml'
 
 class Extractor
-  def initialize(pages)
+  def initialize
     @server = WEBrick::HTTPServer.new(:Port => 9999)
-    @server.mount "", ExtractorServlet, pages
+    @server.mount "", ExtractorServlet
   end
 
   def start
@@ -14,15 +16,9 @@ class Extractor
 end
 
 class ExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
-  def initialize(server, pages)
+  def initialize(server)
     super(server)
     @pages = {}
-    pages.each do |original_page|
-      page = original_page.dup
-      path = page.delete("path")
-      page["paragraphs"] = page["paragraphs"].split(',')
-      @pages[path] = page
-    end
   end
 
   def do_GET(request, response)
@@ -32,13 +28,27 @@ class ExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
     path = request.path
     response.body = (!@pages[path].nil?) ? YAML::dump(@pages[path]) : "Bad path: #{path}"
   end
+
+  def do_POST(request, response)
+    @pages = {}
+    YAML::load(request.query['pages']).each do |page|
+      path = page.delete("path")
+      page["paragraphs"] = page["paragraphs"].split(',')
+      @pages[path] = page
+    end
+  end
 end
 
 if $0 == __FILE__ then
   p "Starting extractor - you will have to kill manually"
-  e = Extractor.new([{"title"=>"BigCo - For All Things Big", 
-                      "paragraphs"=>"BigCo is super.,Visit your local BigCo store!", 
-                      "path"=>"/bigco"}])
+  e = Extractor.new()
   server_pid = fork { e.start}
   p "Server pid is #{server_pid}"
+
+  p "Configuring for BigCo site"
+  pages = [{"title"=>"BigCo - For All Things Big", 
+            "paragraphs"=>"BigCo is super.,Visit your local BigCo store!", 
+            "path"=>"/bigco"}]
+  Net::HTTP.post_form(URI.parse('http://localhost:9999'),
+                      {'pages' => YAML::dump(pages)})
 end
