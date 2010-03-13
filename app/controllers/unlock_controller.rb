@@ -14,6 +14,8 @@ class UnlockController < ApplicationController
 
     def show(path, query_string)
       ignored, short_name, site_path = path.split('/', 3)
+      if site_path.nil? then site_path = "" end
+  
       site = @site_fetcher.find_by_short_name(short_name)
       content = site.fetch(site_path, query_string)
       @receiver.title      = content[:title]
