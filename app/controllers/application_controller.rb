@@ -8,10 +8,12 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
+  attr_accessor :status_code
+
   def method_missing(method)
     @worker.send(method, request.path, request.query_string)
     respond_to do |format|
-      format.html 
+      format.html { render :status => @status_code }
     end
   end
 end
