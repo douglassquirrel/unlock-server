@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   def method_missing(method)
-    @worker.send(method)
+    @worker.send(method, request.path, request.query_string)
     respond_to do |format|
       format.html 
     end

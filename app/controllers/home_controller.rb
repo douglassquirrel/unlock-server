@@ -10,7 +10,7 @@ class HomeController < ApplicationController
       @site_fetcher = site_fetcher
     end
 
-    def index
+    def index(path, query_string)
       @receiver.sites = @site_fetcher.all
     end
   end

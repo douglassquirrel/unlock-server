@@ -10,7 +10,7 @@ class HomeControllerTest < ActiveSupport::TestCase
     site_fetcher = stub(:all => expected_sites)
 
     hcw = HomeController::Worker.new(receiver, site_fetcher)
-    hcw.index
+    hcw.index("/", "")
     assert_equal expected_sites, receiver.sites
   end
 end

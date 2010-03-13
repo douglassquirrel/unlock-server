@@ -12,9 +12,10 @@ class UnlockController < ApplicationController
       @site_fetcher = site_fetcher
     end
 
-    def show
-      content = {:title => "BigCo - For All Things Big",
-                 :paragraphs => ["BigCo is super.", "Visit your local BigCo store!"] }
+    def show(path, query_string)
+      ignored, short_name, site_path = path.split('/', 3)
+      site = @site_fetcher.find_by_short_name(short_name)
+      content = site.fetch(site_path, query_string)
       @receiver.title      = content[:title]
       @receiver.paragraphs = content[:paragraphs]
     end
