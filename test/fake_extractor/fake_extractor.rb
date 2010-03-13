@@ -3,10 +3,10 @@ require 'uri'
 require 'webrick'
 require 'yaml'
 
-class Extractor
+class FakeExtractor
   def initialize
     @server = WEBrick::HTTPServer.new(:Port => 9999)
-    @server.mount "", ExtractorServlet
+    @server.mount "", FakeExtractorServlet
   end
 
   def start
@@ -15,7 +15,7 @@ class Extractor
   end
 end
 
-class ExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
+class FakeExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
   @@servlet = nil
 
   def self.get_instance(server, *options)
@@ -51,7 +51,7 @@ end
 
 if $0 == __FILE__ then
   p "Starting extractor - you will have to kill manually"
-  e = Extractor.new
+  e = FakeExtractor.new
   server_pid = fork { e.start}
   p "Server pid is #{server_pid}"
 
