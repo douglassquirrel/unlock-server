@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def method_missing(method)
     @worker.send(method, request.path, request.query_string)
     respond_to do |format|
-      format.html { render :status => @status_code }
+      format.html { render :status => @status_code, :layout => true }
     end
   end
 end
