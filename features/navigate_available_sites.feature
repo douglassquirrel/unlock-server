@@ -4,6 +4,10 @@ Feature: Navigate available sites
   I want to discover what accessible sites are available using my browser
 
   Background:
+    Given there is an extractor running with the following pages:
+      |path      |title          |paragraphs                 |
+      |/metailer/|MeTailer, Ltd. |MeTailer is great!,Buy now!|
+
     Given the following sites:
       |name          |short_name|
       |BigCo         |bigco     |

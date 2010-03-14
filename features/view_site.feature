@@ -5,8 +5,8 @@ Feature: View site
 
   Background:
     Given there is an extractor running with the following pages:
-      |path  |title                      |paragraphs                                   |
-      |/bigco|BigCo - For All Things Big |BigCo is super.,Visit your local BigCo store!|
+      |path   |title                      |paragraphs                                   |
+      |/bigco/|BigCo - For All Things Big |BigCo is super.,Visit your local BigCo store!|
 
     Given the following sites:
       |name |short_name|
