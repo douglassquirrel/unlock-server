@@ -16,6 +16,8 @@ class Site
   end
 
   def self.find_by_short_name(short_name)
+Rails.logger.info "paths: " + ActiveSupport::Dependencies.load_paths.inspect
+Rails.logger.info "load_once_paths: " + ActiveSupport::Dependencies.load_once_paths.inspect
     return @@sites.find { |site| site.short_name == short_name }
   end
 

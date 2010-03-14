@@ -58,7 +58,7 @@ if $0 == __FILE__ then
   p "Configuring for BigCo site"
   pages = [{"title"=>"BigCo - For All Things Big", 
             "paragraphs"=>"BigCo is super.,Visit your local BigCo store!", 
-            "path"=>"/bigco"}]
+            "path"=>"/bigco/"}]
   Net::HTTP.post_form(URI.parse('http://localhost:9999/'),
                       {'pages' => YAML::dump(pages)})
 end
