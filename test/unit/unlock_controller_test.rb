@@ -20,9 +20,9 @@ class UnlockControllerTest < ActiveSupport::TestCase
     ignored, short_name, site_path = path.split('/', 3)
     if site_path.nil? then site_path = "" end
 
-    content = {:status_code => expected_status_code,
-               :title       => expected_title, 
-               :paragraphs  => expected_paragraphs}
+    content = {"status_code" => expected_status_code,
+               "title"       => expected_title, 
+               "paragraphs"  => expected_paragraphs}
     site = mock('site') do
       expects(:fetch).once.with(site_path, query_string).returns(content)
     end

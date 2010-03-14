@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Site
   @@sites = []
 
@@ -19,8 +21,13 @@ class Site
 
   attr_accessor :name, :short_name
 
-  def initialize(name, short_name)
+  def initialize(name, short_name, url)
     @name       = name
     @short_name = short_name
+    @url        = url
+  end
+
+  def fetch(path, query_string)
+    YAML::load(open("#{@url}/#{path}?#{query_string}"))
   end
 end

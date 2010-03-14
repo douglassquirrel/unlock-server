@@ -21,9 +21,9 @@ class UnlockController < ApplicationController
       copy_to_receiver content
     end
 
-  private
+    private
     def copy_to_receiver(content)
-      content.each_pair { |key, value| @receiver.send(key.to_s+"=", value) }
+      content.each_pair { |key, value| @receiver.send(key+"=", value) }
     end
   end
 end

@@ -1,30 +1,33 @@
+require 'test/fake_extractor/fake_extractor'
+require 'net/http'
 require 'test_helper'
+require 'uri'
+require 'yaml'
 
 class SiteTest < ActiveSupport::TestCase
-  def setup
-    Site.clear_all
+  def test_fetches_content
+    begin
+      server_pid = start_extractor([{"path"=>"/ralphs/", "status_code"=>200,
+                                     "title"=>"Ralph's Car Repair", "paragraphs"=>"You crash it.,We fix it.", }])
+
+      site = Site.new("Ralph's Car Repair", "ralphs", "http://localhost:9999/ralphs")
+      expected_content = {"status_code" => 200, "title" => "Ralph's Car Repair", "paragraphs" => ["You crash it.", "We fix it."]}
+      assert_equal expected_content, site.fetch("", "")
+    ensure
+       Process.kill("INT", server_pid)
+    end
   end
 
-  def test_registers_a_site
-    Site.register Site.new("East Grimsbane Council", "grimsbane")
-    site = Site.find_by_short_name "grimsbane"
-    assert_not_nil site
-    assert check_attributes site, "East Grimsbane Council", "grimsbane"
+  def test_gives_useful_error_when_extractor_down
+    flunk
   end
 
-  def test_returns_nil_for_nonexistent_site
-    assert_nil Site.find_by_short_name "nonexistent"
-  end
-
-  def test_will_return_all_sites
-    Site.register Site.new("Spatula City",            "spatulacity")
-    Site.register Site.new("Dewey, Cheatham, & Howe", "dch"        )
-    sites = Site.all
-    assert_not_nil sites.find { |site| check_attributes site, "Spatula City",            "spatulacity" }, "Could not find site Spatula City"
-    assert_not_nil sites.find { |site| check_attributes site, "Dewey, Cheatham, & Howe", "dch"         }, "Could not find site Dewey, Cheatham, & Howe"
-  end
-
-  def check_attributes(s, name, short_name)
-    s.name == name && s.short_name = short_name
+  private
+  def start_extractor(pages)
+      extractor = FakeExtractor.new 
+      server_pid = fork { extractor.start }
+      Net::HTTP.post_form(URI.parse('http://localhost:9999/'),
+                          {'pages' => YAML::dump(pages)})
+      return server_pid    
   end
 end
