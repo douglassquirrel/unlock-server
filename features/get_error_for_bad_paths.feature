@@ -6,7 +6,7 @@ Feature: Get error for bad paths
   Background:
     Given there is an extractor running with the following pages:
       |path         |title            |paragraphs                        |
-      |/atlantisbank|Bank Of Atlantis |Serving Atlanteans for 5000 years.|
+      |/atlantisbank/|Bank Of Atlantis |Serving Atlanteans for 5000 years.|
 
     Given the following sites:
       |name            |short_name  | 
