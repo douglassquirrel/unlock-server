@@ -36,7 +36,7 @@ class Site
         YAML::load(open("#{@url}/#{path}?#{query_string}"))
       end
     rescue Timeout::Error
-      {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry, cannot display that page."]}
+      {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."]}
     end
   end
 end
@@ -47,6 +47,6 @@ class NotFoundSite < Site
   end
 
   def fetch(path, query_string)
-    return {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry, cannot display that page."]}
+    return {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."]}
   end
 end

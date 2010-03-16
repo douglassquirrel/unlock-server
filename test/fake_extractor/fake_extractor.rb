@@ -44,6 +44,7 @@ class FakeExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
     pages.each do |page|
       path = page.delete("path")
       page["paragraphs"] = page["paragraphs"].split(',')
+      if page["status_code"].nil? then page["status_code"] = 200 end
       @pages[path] = page
     end
   end

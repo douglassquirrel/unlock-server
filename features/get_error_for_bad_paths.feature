@@ -5,8 +5,9 @@ Feature: Get error for bad paths
 
   Background:
     Given there is an extractor running with the following pages:
-      |path         |title            |paragraphs                        |
-      |/atlantisbank/|Bank Of Atlantis |Serving Atlanteans for 5000 years.|
+      |path                  |title            |paragraphs                        |status_code|
+      |/atlantisbank/        |Bank Of Atlantis |Serving Atlanteans for 5000 years.|200        |
+      |/atlantisbank/not-here|Unknown path     |Sorry - cannot display that page.  |404        |
 
     Given the following sites:
       |name            |short_name  | 
