@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'timeout'
 
 class Site
   @@sites = []
@@ -16,20 +17,36 @@ class Site
   end
 
   def self.find_by_short_name(short_name)
-Rails.logger.info "paths: " + ActiveSupport::Dependencies.load_paths.inspect
-Rails.logger.info "load_once_paths: " + ActiveSupport::Dependencies.load_once_paths.inspect
-    return @@sites.find { |site| site.short_name == short_name }
+    site = @@sites.find { |site| site.short_name == short_name }
+    return site.nil? ? NotFoundSite.new : site
   end
 
-  attr_accessor :name, :short_name
+  attr_accessor :name, :short_name, :timeout
 
   def initialize(name, short_name, url)
     @name       = name
     @short_name = short_name
     @url        = url
+    @timeout    = 30
   end
 
   def fetch(path, query_string)
-    YAML::load(open("#{@url}/#{path}?#{query_string}"))
+    begin
+      Timeout::timeout(@timeout) do
+        YAML::load(open("#{@url}/#{path}?#{query_string}"))
+      end
+    rescue Timeout::Error
+      {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry, cannot display that page."]}
+    end
+  end
+end
+
+class NotFoundSite < Site
+  def initialize
+    super("Not Found", "notfound", "http://blindpages.com/notfound")
+  end
+
+  def fetch(path, query_string)
+    return {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry, cannot display that page."]}
   end
 end
