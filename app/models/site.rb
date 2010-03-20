@@ -18,6 +18,7 @@ class Site
   end
 
   def self.find_by_short_name(short_name)
+    if short_name.empty? then return HomeSite.new end
     site = @@sites.find { |site| site.short_name == short_name }
     return site.nil? ? NotFoundSite.new : site
   end
@@ -36,7 +37,7 @@ class Site
       Timeout::timeout(@timeout) do
         YAML::load(open("#{@url}/#{path}?#{query_string}"))
       end
-    rescue
+    rescue StandardError, Timeout::Error
       @@not_found_content
     end
   end
@@ -49,5 +50,16 @@ class NotFoundSite < Site
 
   def fetch(path, query_string)
     @@not_found_content
+  end
+end
+
+class HomeSite < Site
+  def initialize
+    super("Home", "", "http://blindpages.com")
+  end
+
+  def fetch(path, query_string)
+     {"status_code" => 200, "title" => "Welcome to BlindPages", "paragraphs" => [], 
+      "links" => Site.all.collect { |site| {"text" => site.name, "url" => "/#{site.short_name}"} }.sort { |x,y| x["text"] <=> y["text"] } }
   end
 end

@@ -16,7 +16,11 @@ Feature: Navigate available sites
   Scenario: Visit home page
     Given I am on the home page
     Then I should see the title "Welcome to BlindPages"
-      And I should see a list with caption "Sites available through BlindPages"
+    And I should see no paragraphs
+    And I should see these links:
+      |text          |url      |
+      |BigCo         |/bigco   |
+      |MeTailer, Ltd.|/metailer|     
 
   Scenario: Visit site
     Given I am on the home page

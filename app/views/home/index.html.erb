@@ -1,8 +1,0 @@
-<h1>Welcome to BlindPages</h1>
-
-<h2 id="caption">Sites available through BlindPages:</h2>
-<ul>
-  <% @sites.each do |site| %>
-    <li><a href="<%= "/" + site.short_name %>"><%= site.name %></a></li>
-  <% end %>
-</ul>

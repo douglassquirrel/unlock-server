@@ -16,6 +16,18 @@ class SiteClassTest < ActiveSupport::TestCase
     site = Site.find_by_short_name "nonexistent"
     expected_content = {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."], "links" => []}
     assert_equal expected_content, site.fetch("", "")
+    assert_equal expected_content, site.fetch("about/team", "")
+    assert_equal expected_content, site.fetch("users", "name=Fred&location=London")
+  end
+
+  def test_returns_home_site_for_empty_short_name
+    Site.register Site.new("Smithson Hospital", "smithson", "http://example.com/smithson")
+    Site.register Site.new("Banana Computers", "banana", "http://example.com/banana")
+    site = Site.find_by_short_name ""
+    expected_content = {"status_code" => 200, "title" => "Welcome to BlindPages", "paragraphs" => [], 
+                        "links" => [{"text" => "Banana Computers", "url" => "/banana"},
+                                    {"text" => "Smithson Hospital", "url" => "/smithson"}]}
+    assert_equal expected_content, site.fetch("", "")
   end
 
   def test_will_return_all_sites
