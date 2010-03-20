@@ -14,7 +14,7 @@ class SiteClassTest < ActiveSupport::TestCase
 
   def test_returns_error_page_when_site_does_not_exist
     site = Site.find_by_short_name "nonexistent"
-    expected_content = {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."]}
+    expected_content = {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."], "links" => []}
     assert_equal expected_content, site.fetch("", "")
   end
 

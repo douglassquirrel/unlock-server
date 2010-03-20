@@ -1,6 +1,7 @@
 class UnlockController < ApplicationController
   attr_accessor :title
   attr_accessor :paragraphs
+  attr_accessor :links
 
   def initialize
     @worker = Worker.new(self)

@@ -43,7 +43,16 @@ class FakeExtractorServlet < WEBrick::HTTPServlet::AbstractServlet
     pages = YAML::load(request.query['pages'])
     pages.each do |page|
       path = page.delete("path")
-      page["paragraphs"] = page["paragraphs"].split(',')
+      if !page["paragraphs"].nil?
+        page["paragraphs"] = page["paragraphs"].split(',')
+      else
+        page["paragraphs"] = []
+      end
+      if !page["links"].nil? then
+        page["links"] = page["links"].split(",").collect { |s| {"text" => s.split("+")[0], "url" => s.split("+")[1]} }
+      else
+        page["links"] = []
+      end
       if page["status_code"].nil? then page["status_code"] = 200 end
       @pages[path] = page
     end
@@ -57,9 +66,12 @@ if $0 == __FILE__ then
   p "Server pid is #{server_pid}"
 
   p "Configuring for BigCo site"
-  pages = [{"title"=>"BigCo - For All Things Big", 
-            "paragraphs"=>"BigCo is super.,Visit your local BigCo store!", 
-            "path"=>"/bigco/"}]
+  pages = [{"title"=>"BigCo - For All Things Big", "links"=>"", "paragraphs"=>"BigCo is super.,Visit your local BigCo store!", "path"=>"/bigco/"},
+           {"title"=>"Find A Store", "links"=>"Margate Road+/bigco/store1,Towcester Central+bigco/store2", "paragraphs"=>"", "path"=>"/bigco/stores"},
+           {"title"=>"Margate Road Store", "links"=>"Back to stores+/bigco/stores", 
+                                           "paragraphs"=>"Open 24 hours,Deli and Bakery", "path"=>"/bigco/store1"}, 
+           {"title"=>"Towcester Central Store", "links"=>"Back to stores+/bigco/stores", 
+                                                "paragraphs"=>"Open Monday-Friday,Home Furnishings", "path"=>"/bigco/store2"}]
   Net::HTTP.post_form(URI.parse('http://localhost:9999/'),
                       {'pages' => YAML::dump(pages)})
 end

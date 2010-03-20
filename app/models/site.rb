@@ -47,6 +47,6 @@ class NotFoundSite < Site
   end
 
   def fetch(path, query_string)
-    return {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."]}
+    return {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."], "links" => []}
   end
 end
