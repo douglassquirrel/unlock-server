@@ -1,10 +1,15 @@
 class UnlockController < ApplicationController
-  attr_accessor :title
-  attr_accessor :paragraphs
-  attr_accessor :links
+  attr_accessor :title, :paragraphs, :links, :status_code
 
   def initialize
     @worker = Worker.new(self)
+  end
+
+  def show
+    @worker.show(request.path, request.query_string)
+    respond_to do |format|
+      format.html { render :status => @status_code, :layout => true }
+    end
   end
 
   class Worker
