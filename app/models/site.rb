@@ -3,6 +3,7 @@ require 'timeout'
 
 class Site
   @@sites = []
+  @@not_found_content = {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."], "links" => []}
 
   def self.clear_all
     @@sites = []
@@ -35,8 +36,8 @@ class Site
       Timeout::timeout(@timeout) do
         YAML::load(open("#{@url}/#{path}?#{query_string}"))
       end
-    rescue Timeout::Error
-      {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."]}
+    rescue
+      @@not_found_content
     end
   end
 end
@@ -47,6 +48,6 @@ class NotFoundSite < Site
   end
 
   def fetch(path, query_string)
-    return {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."], "links" => []}
+    @@not_found_content
   end
 end

@@ -67,7 +67,7 @@ if $0 == __FILE__ then
 
   p "Configuring for BigCo site"
   pages = [{"title"=>"BigCo - For All Things Big", "links"=>"", "paragraphs"=>"BigCo is super.,Visit your local BigCo store!", "path"=>"/bigco/"},
-           {"title"=>"Find A Store", "links"=>"Margate Road+/bigco/store1,Towcester Central+bigco/store2", "paragraphs"=>"", "path"=>"/bigco/stores"},
+           {"title"=>"Find A Store", "links"=>"Margate Road+/bigco/store1,Towcester Central+/bigco/store2", "paragraphs"=>"", "path"=>"/bigco/stores"},
            {"title"=>"Margate Road Store", "links"=>"Back to stores+/bigco/stores", 
                                            "paragraphs"=>"Open 24 hours,Deli and Bakery", "path"=>"/bigco/store1"}, 
            {"title"=>"Towcester Central Store", "links"=>"Back to stores+/bigco/stores", 
