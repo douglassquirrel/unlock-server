@@ -16,7 +16,9 @@ Feature: Get error for bad paths
   Scenario: Visit nonexistent site
     When I visit the nonexistent "not-here" page
     Then I should see a helpful, accessible "Not Found" page
+    And the page should be valid XHTML
 
   Scenario: Visit nonexistent path on valid site
     When I visit the nonexistent "atlantisbank/not-here" page
     Then I should see a helpful, accessible "Not Found" page
+    And the page should be valid XHTML

@@ -15,7 +15,8 @@ Feature: Navigate available sites
 
   Scenario: Visit home page
     Given I am on the home page
-    Then I should see the title "Welcome to BlindPages"
+    Then the page should be valid XHTML
+    And I should see the title "Welcome to BlindPages"
     And I should see no paragraphs
     And I should see these links:
       |text          |url      |
@@ -26,3 +27,5 @@ Feature: Navigate available sites
     Given I am on the home page
     When I follow "MeTailer, Ltd."
     Then I should be on the accessible "metailer" page
+    And the page should be valid XHTML
+
