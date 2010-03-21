@@ -1,4 +1,3 @@
-Move site storage to database
 Do mobile phone HTML incl validation
 Do voicexml incl validation
-
+ 

@@ -27,7 +27,7 @@ class UnlockControllerTest < ActiveSupport::TestCase
       expects(:fetch).once.with(site_path, query_string).returns(content)
     end
     site_fetcher = stub('site_fetcher') do
-      expects(:find_by_short_name).with(short_name).returns(site)
+      expects(:lookup).with(short_name).returns(site)
     end
 
     receiver = Struct.new(:status_code, :title, :paragraphs).new

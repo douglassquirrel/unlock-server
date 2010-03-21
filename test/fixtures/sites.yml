@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  short_name: MyString
+  url: MyString
+  timeout: 1
+
+two:
+  name: MyString
+  short_name: MyString
+  url: MyString
+  timeout: 1

@@ -11,7 +11,7 @@ class SiteTest < ActiveSupport::TestCase
                                      "title"=>"Ralph's Car Repair", "paragraphs"=>"You crash it.,We fix it.",
                                      "links"=>"Hours+/hours,Location+/location"}])
 
-      site = Site.new("Ralph's Car Repair", "ralphs", "http://localhost:9999/ralphs")
+      site = Site.new({:name => "Ralph's Car Repair", :short_name =>"ralphs", :url => "http://localhost:9999/ralphs", :timeout => 30})
       expected_content = {"status_code" => 200, "title" => "Ralph's Car Repair", "paragraphs" => ["You crash it.", "We fix it."], 
                           "links" => [{"text" => "Hours", "url" => "/hours"}, {"text" => "Location", "url" => "/location"}]}
       assert_equal expected_content, site.fetch("", "")
@@ -21,8 +21,7 @@ class SiteTest < ActiveSupport::TestCase
   end
 
   def test_gives_useful_error_when_extractor_down
-    site = Site.new("Ralph's Car Repair", "ralphs", "http://localhost:9999/ralphs")
-    site.timeout = 1
+    site = Site.new({:name => "Ralph's Car Repair", :short_name => "ralphs", :url => "http://localhost:9999/ralphs", :timeout => 1})
     expected_content = {"status_code" => 404, "title" => "Unknown page", "paragraphs" => ["Sorry - cannot display that page."], "links"=>[]}
     assert_equal expected_content, site.fetch("", "")
   end

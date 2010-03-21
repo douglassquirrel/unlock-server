@@ -25,7 +25,7 @@ class UnlockController < ApplicationController
       ignored, short_name, site_path = path.split('/', 3)
       if site_path.nil? then site_path = "" end
   
-      site = @site_fetcher.find_by_short_name(short_name)
+      site = @site_fetcher.lookup(short_name)
       content = site.fetch(site_path, query_string)
       copy_to_receiver content
     end
