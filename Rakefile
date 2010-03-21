@@ -14,4 +14,5 @@ require 'metric_fu'
 MetricFu::Configuration.run do |config|
   config.metrics.delete :rcov
   config.graphs.delete  :rcov
+  config.saikuro[:input_directory] = ['app']
 end
