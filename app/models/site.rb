@@ -40,8 +40,7 @@ end
 # A site that returns static content for the home page, with links to all supported sites.
 class HomeSite < StaticSite
   def initialize
-    links = Site.all.collect { |site| {"text" => site.name, "url" => "/#{site.short_name}"} }
-    links.sort! { |first_site, second_site| first_site["text"] <=> second_site["text"] }
+    links = Site.all.collect { |site| {"text" => site.name, "url" => "/#{site.short_name}"} }.sort_by { |site| site["text"] }
     @content = {"status_code" => 200, "title" => "Welcome to BlindPages", "paragraphs" => [], "links" => links }
   end
 end
