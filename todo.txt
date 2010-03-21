@@ -1,3 +1,6 @@
+Metric-fu
+Validate XHTML
 Do voicexml
+Validate VoiceXML
 Do mobile phone HTML (just doctype?)
 
