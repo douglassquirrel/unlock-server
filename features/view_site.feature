@@ -15,7 +15,7 @@ Feature: View site
       |name |short_name|
       |BigCo|bigco     |
 
-  Scenario: Visit simple home page with just paragraphs
+  Scenario: Visit simple home page with just text
     Given I am on the accessible "bigco" page
     Then the page should be valid XHTML
     Then I should see the title "BigCo - For All Things Big"
@@ -34,3 +34,15 @@ Feature: View site
       |text             |url          |
       |Margate Road     |/bigco/store1|
       |Towcester Central|/bigco/store2|
+
+  Scenario: Visit page with text and links
+    Given I am on the accessible "bigco/store1" page
+    Then the page should be valid XHTML
+    Then I should see the title "Margate Road Store"
+    And I should see these paragraphs: 
+      |text           | 
+      |Open 24 hours  |
+      |Deli and Bakery|
+    And I should see these links:
+      |text             |url          |
+      |Back to stores   |/bigco/stores|
