@@ -1,3 +1,4 @@
+# Controller for all content made accessible
 class UnlockController < ApplicationController
   attr_accessor :title, :paragraphs, :links, :status_code
 
@@ -12,6 +13,8 @@ class UnlockController < ApplicationController
     end
   end
 
+  # Does the actual work of the controller. A "good citizen" with injected dependencies: a receiver on which data is set,
+  # and a site_fetcher that looks up sites.
   class Worker
     def initialize(receiver, site_fetcher = Site)
       @receiver = receiver

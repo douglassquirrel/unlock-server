@@ -1,4 +1,4 @@
-Metric-fu
+Implement site registry
 Validate XHTML
 Do voicexml
 Validate VoiceXML
