@@ -1,5 +1,5 @@
-Implement site registry
 Validate XHTML
+Move site storage to database
 Do voicexml
 Validate VoiceXML
 Do mobile phone HTML (just doctype?)
