@@ -16,7 +16,9 @@ Feature: Navigate available sites
   Scenario: Hear menu
     Given I have called the service
     Then the service should provide valid VoiceXML
-    And I should hear the title "Welcome to BlindPages"
+    And I should hear the paragraphs
+      |text                 |
+      |Welcome to BlindPages|
     And I should hear a menu with this information:
       |option|text          |url      |
       |1     |BigCo         |/bigco   |
