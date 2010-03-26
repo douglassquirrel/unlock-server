@@ -18,7 +18,7 @@ Feature: View site
   Scenario: Visit simple home page with just text
     Given I am on the accessible "bigco" page
     Then the page should be valid XHTML
-    Then I should see the title "BigCo - For All Things Big"
+    And I should see the title "BigCo - For All Things Big"
     And I should see these paragraphs: 
       |text                         | 
       |BigCo is super.              |
@@ -28,7 +28,7 @@ Feature: View site
   Scenario: Visit page with just links
     Given I am on the accessible "bigco/stores" page
     Then the page should be valid XHTML
-    Then I should see the title "Find A Store"
+    And I should see the title "Find A Store"
     And I should see no paragraphs
     And I should see these links:
       |text             |url          |
@@ -38,7 +38,7 @@ Feature: View site
   Scenario: Visit page with text and links
     Given I am on the accessible "bigco/store1" page
     Then the page should be valid XHTML
-    Then I should see the title "Margate Road Store"
+    And I should see the title "Margate Road Store"
     And I should see these paragraphs: 
       |text           | 
       |Open 24 hours  |

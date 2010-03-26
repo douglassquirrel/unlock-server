@@ -1,3 +1,2 @@
-Do mobile phone HTML incl validation
 Do voicexml incl validation
- 
+Test on mobile phones 
