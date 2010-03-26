@@ -1,5 +1,4 @@
 Then /^I should hear the paragraphs$/ do |expected_paragraphs|
-print body
   doc = Nokogiri::XML(body)
   nodes = doc.xpath("/v:vxml/v:form/v:block/v:prompt/v:prosody/text()", 'v' => 'http://www.w3.org/2001/vxml')
   actual_paragraphs = [['text']] | nodes.collect { |node| [node.to_s] }
