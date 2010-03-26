@@ -16,5 +16,10 @@ xml.vxml "xmlns" => "http://www.w3.org/2001/vxml", "version" => "2.1" do
         add_prompt(xml, text)
       end
     end
+    xml.field "name" => "choice" do
+      @links.each_with_index do |link, i|
+        add_prompt(xml, "Press #{i+1} for #{link['text']}")
+      end
+    end
   end
 end

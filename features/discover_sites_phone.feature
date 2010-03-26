@@ -5,13 +5,13 @@ Feature: Navigate available sites
 
   Background:
     Given there is an extractor running with the following pages:
-      |path      |title          |paragraphs                 |
-      |/metailer/|MeTailer, Ltd. |MeTailer is great!,Buy now!|
+      |path      |title            |paragraphs                 |
+      |/metailer/|MeTailer, Limited|MeTailer is great!,Buy now!|
 
     Given the following sites:
-      |name          |short_name|
-      |BigCo         |bigco     |
-      |MeTailer, Ltd.|metailer  |
+      |name             |short_name|
+      |BigCo            |bigco     |
+      |MeTailer, Limited|metailer  |
 
   Scenario: Hear menu
     Given I have called the service
@@ -20,9 +20,9 @@ Feature: Navigate available sites
       |text                 |
       |Welcome to BlindPages|
     And I should hear a menu with this information:
-      |option|text          |url      |
-      |1     |BigCo         |/bigco   |
-      |2     |MeTailer, Ltd.|/metailer|     
+      |text                         |
+      |Press 1 for BigCo            |
+      |Press 2 for MeTailer, Limited|    
 
   Scenario: Visit site
     Given I have called the service
