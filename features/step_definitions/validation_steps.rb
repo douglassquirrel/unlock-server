@@ -1,7 +1,9 @@
-Then /^the page should be valid (.*)$/ do |type|
+Then /^the (?:page should be|service should provide) valid (.*)$/ do |type|
   doctype, schema_filename = case type
   when "XHTML"
     [%r|<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">|, 'xhtml1-strict.xsd']
+  when "VoiceXML"
+    [%r|<!DOCTYPE vxml PUBLIC "-//W3C//DTD VOICEXML 2.1//EN" "http://www.w3.org/TR/voicexml21/vxml.dtd"|, 'vxml.xsd']
   else
     flunk "Unknown type #{type}"
   end

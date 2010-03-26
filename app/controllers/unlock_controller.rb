@@ -9,7 +9,8 @@ class UnlockController < ApplicationController
   def show
     @worker.show(request.path, request.query_string)
     respond_to do |format|
-      format.html { render :status => @status_code, :layout => true }
+      format.html { render :status => @status_code, :layout => true } # show.html.erb
+      format.voicexml                                                 # show.voicexml.rxml
     end
   end
 
