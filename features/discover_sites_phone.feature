@@ -15,7 +15,7 @@ Feature: Navigate available sites
 
   Scenario: Hear menu
     Given I have called the service
-    Then the service should provide valid VoiceXML
+    Then the service should provide valid VoiceXML with correct settings
     And I should hear the paragraphs
       |text                 |
       |Welcome to BlindPages|
@@ -27,4 +27,4 @@ Feature: Navigate available sites
   Scenario: Visit site
     Given I have called the service
     When I select choice 2
-    Then the service should provide valid VoiceXML
+    Then the service should provide valid VoiceXML with correct settings

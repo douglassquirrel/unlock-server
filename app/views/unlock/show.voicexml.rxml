@@ -1,17 +1,17 @@
 def add_prompt(xml, text)
   xml.prompt do
     xml.prosody({"rate" => "-20%"}, text)
-    #xml.break "time" => "500"
+    xml.break "time" => "500ms"
   end
 end
 
 xml.instruct! 
 xml.declare! :DOCTYPE, :vxml, :PUBLIC , "-//W3C//DTD VOICEXML 2.1//EN", "http://www.w3.org/TR/voicexml21/vxml.dtd"
 xml.vxml "xmlns" => "http://www.w3.org/2001/vxml", "version" => "2.1" do
-  #xml.property "name" => "inputmodes", "value" => "dtmf"
+  xml.property "name" => "inputmodes", "value" => "dtmf"
   xml.form do
     xml.block do
-      #xml.break "time" => "1000"
+      xml.prompt do xml.break "time" => "1000ms" end
       ([@title] | @paragraphs).each do |text|
         add_prompt(xml, text)
       end
