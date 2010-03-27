@@ -9,11 +9,21 @@ xml.vxml "xmlns" => "http://www.w3.org/2001/vxml", "version" => "2.1" do
         add_prompt(xml, text)
       end
     end
-    xml.field "name" => "choice" do
-      @links.each_with_index do |link, i|
-        add_prompt(xml, "Press #{i+1} for #{link['text']}")
+    if !@links.empty? then
+      xml.field "name" => "choice" do
+        @links.each_with_index do |link, i|
+          add_prompt(xml, "Press #{i+1} for #{link['text']}")
+        end
+        add_grammar(xml, @links.size)
       end
-      add_grammar(xml, @links.size)
+      xml.filled do
+        @links.each_with_index do |link, i|
+          xml.if "cond" => "choice == '#{i+1}'" do
+            xml.submit "next" => link['url'], "method" => "get"
+          end 
+        end
+      end
     end
   end
 end
+

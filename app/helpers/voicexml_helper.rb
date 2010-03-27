@@ -10,8 +10,8 @@ module VoicexmlHelper
     xml.grammar "xml:lang"=>"en-GB", "root"=>"top", "mode"=>"dtmf" do
       xml.rule "id"=>"top" do
         xml.__send__('one-of'.to_sym) do
-          (1..number).each do |i| 
-            xml.item i
+          (1..number).each do |choice| 
+            xml.item choice
           end
         end
       end
