@@ -5,7 +5,7 @@ require 'yaml'
 
 class FakeExtractor
   def initialize
-    @server = WEBrick::HTTPServer.new(:Port => 9999)
+    @server = WEBrick::HTTPServer.new(:Port => 9999, :Logger => WEBrick::Log.new(nil, WEBrick::BasicLog::WARN), :AccessLog=>[])
     @server.mount "", FakeExtractorServlet
   end
 
