@@ -12,7 +12,7 @@ Then /^I should hear a menu with this information:$/ do |expected_menu|
   expected_menu.diff! actual_menu
 
   expected_grammar_items = (1..expected_menu.rows.size).to_a.collect { |i| i.to_s }
-  grammar_item_nodes = doc.xpath("/v:vxml/v:form/v:field[@name='choice']/v:grammar[@xml:lang='en-GB' and @root='top' and @mode='dtmf']/v:rule[@id='top']/v:one-of/v:item/text()", 
+  grammar_item_nodes = doc.xpath("/v:vxml/v:form/v:field[@name='choice']/v:grammar/v:rule/v:one-of/v:item/text()", 
                                  'v' => 'http://www.w3.org/2001/vxml')
   actual_grammar_items = grammar_item_nodes.collect { |node| node.to_s }
   assert_equal expected_grammar_items, actual_grammar_items, "Grammar should list expected DTMF tones"

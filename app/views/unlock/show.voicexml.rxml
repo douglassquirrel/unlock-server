@@ -13,15 +13,7 @@ xml.vxml "xmlns" => "http://www.w3.org/2001/vxml", "version" => "2.1" do
       @links.each_with_index do |link, i|
         add_prompt(xml, "Press #{i+1} for #{link['text']}")
       end
-      xml.grammar "xml:lang"=>"en-GB", "root"=>"top", "mode"=>"dtmf" do
-        xml.rule "id"=>"top" do
-          xml.__send__('one-of'.to_sym) do
-            (1..@links.size).each do |i| 
-              xml.item i
-            end
-          end
-        end
-      end
+      add_grammar(xml, @links.size)
     end
   end
 end
