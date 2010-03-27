@@ -5,10 +5,9 @@ Given /^I have called the service$/ do
 end
 
 When /^I select choice ([0-9*#])$/ do |choice|
-  doc = Nokogiri::XML(body)
-  nodes = doc.xpath("/v:vxml/v:form/v:filled/v:if[@cond=\"choice == '#{choice}'\"]/v:submit/@next", voicexml_namespace)
-  assert (!nodes.nil? and nodes.size == 1), "Choice #{choice} not available"
-  url = nodes[0].to_s + '?format=voicexml'
+  urls = apply_xpath("/v:vxml/v:form/v:filled/v:if[@cond=\"choice == '#{choice}'\"]/v:submit/@next", body)
+  assert (!urls.nil? and urls.size == 1), "Choice #{choice} not available"
+  url = "#{urls[0]}?format=voicexml"
   visit url
 end
 
