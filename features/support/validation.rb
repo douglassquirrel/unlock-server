@@ -15,11 +15,6 @@ module ValidationHelpers
     doc = Nokogiri::XML(body)
     assert !doc.xpath(xpath, 'v' => 'http://www.w3.org/2001/vxml').empty?, message
   end
-
-  def check_not_present(body, xpath, message)
-    doc = Nokogiri::XML(body)
-    assert doc.xpath(xpath, 'v' => 'http://www.w3.org/2001/vxml').empty?, message
-  end
 end
 
 World(ValidationHelpers)

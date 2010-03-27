@@ -1,5 +1,6 @@
 # Controller for all content made accessible
 class UnlockController < ApplicationController
+  helper VoicexmlHelper
   attr_accessor :title, :paragraphs, :links, :status_code
 
   def initialize
