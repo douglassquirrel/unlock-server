@@ -1,1 +1,1 @@
-script/server -d -p 8081
+script/server -d -p 8080
